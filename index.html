@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=yes, width=device-width">
+    <script src="jquery-3.1.1.min.js"></script>
+    <script src="canvas.min.js"></script>
+    <script src="highstock.js"></script>
+    <script src="exporting.js"></script>
+    <script src="export-data.js"></script>
+    <script src="gauge.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="index.css"/>   
+    <style> td { border: 1px solid rgb(206, 203, 203); padding: 5px;}table {border-spacing: 15px; } </style>      
+</head>
+
+<body onload="lecturaSlider()">   <!--inicio con ejecutar funcion lecturaslider-->
+            
+<table  style="background:rgb(255, 255, 255)"; >
+      
+   <tr><!--Comienza la primera fila de la tabla-->        
+        <td valign="top">
+        <div class="title2">PARTICULAS DE POLVO</div> 
+        <div >   
+        <canvas  id="ratios" data-type="radial-gauge"
+        data-width="220"
+        data-height="220"
+        data-units="%"
+        data-title="RATIO"
+        data-min-value="0"
+        data-max-value="100"
+        data-value="0"
+        data-major-ticks="0,10,20,30,40,50,60,70,80,90,100"
+        data-minor-ticks="2"
+        data-stroke-ticks="false"
+        data-highlights='[
+            { "from": 0, "to": 10, "color": "rgba(0,0,0,.0)" },
+            { "from": 10, "to": 20, "color": "rgba(0,0,0,.1)" },
+            { "from": 20, "to": 50, "color": "rgba(0,0,0,.3)" },
+            { "from": 50, "to": 100, "color": "rgba(0,0,0,.5)" }           
+        ]'
+        data-color-white="#000"
+        data-color-major-ticks="#000000"
+        data-color-minor-ticks="#000"
+        data-color-title="#000"
+        data-color-units="#000"
+        data-color-numbers="#000"
+        data-color-needle-start="rgba(240, 128, 128, 1)"
+        data-color-needle-end="rgba(255, 160, 122, .9)"
+        data-color-needle-shadow-down="#333"
+        data-value-box="true"
+        data-animation-rule="bounce"
+        data-animation-duration="500"
+        data-font-value="Led"
+        data-animated-value="true"
+        ></canvas>
+        </div>
+
+        <div class="title2">MONOXIDO DE CARBONO<br>
+        </div> 
+        <div>   
+        <canvas  id="monoxido" data-type="radial-gauge"
+        data-width="220"
+        data-height="220"
+        data-units="ppm"
+        data-title="MONOXIDO DE CARBONO"
+        data-min-value="00"
+        data-max-value="200"
+        data-value="0"
+        data-major-ticks="0,40,80,120,160,200"
+        data-minor-ticks="2"
+        data-stroke-ticks="false"
+        data-highlights='[
+        { "from": 0, "to": 70, "color": "rgba(0,242,0,.15)" },
+        { "from": 70, "to": 80, "color": "rgba(200,0,0,.15)" },
+        { "from": 80, "to": 120, "color": "rgba(200,0,0,.20)" },
+        { "from": 120, "to": 160, "color": "rgba(200,0,0,.50)" },
+        { "from": 160, "to": 200, "color": "rgba(200,0,0,.90)" }
+         ]'
+        data-color-white="#"
+        data-color-major-ticks="#000000"
+        data-color-minor-ticks="#000"
+        data-color-title="#000"
+        data-color-units="#000"
+        data-color-numbers="#000"
+        data-color-needle-start="rgba(240, 128, 128, 1)"
+        data-color-needle-end="rgba(255, 160, 122, .9)"
+        data-color-needle-shadow-down="#333"
+        data-value-box="true"
+        data-animation-rule="bounce"
+        data-animation-duration="500"
+        data-font-value="Led"
+        data-animated-value="true"
+        ></canvas>
+        </div>
+
+        <div class="title2">GAS METANO<br>
+        </div> 
+        <div>   
+        <canvas  id="metano" data-type="radial-gauge"
+        data-width="180"
+        data-height="180"
+        data-units="ppm"
+        data-title="METANO"
+        data-min-value="00"
+        data-max-value="10"
+        data-value="0"
+        data-major-ticks="0,2,4,6,8,10"
+        data-minor-ticks="2"
+        data-stroke-ticks="false"
+        data-highlights='[
+        { "from": 0, "to": 2, "color": "rgba(0,0,0,.15)" },
+        { "from": 2, "to": 4, "color": "rgba(0,0,0,.15)" },
+        { "from": 4, "to": 6, "color": "rgba(0,0,0,.20)" },
+        { "from": 6, "to": 8, "color": "rgba(0,0,0,.50)" },
+        { "from": 8, "to": 10, "color": "rgba(0,0,0,.90)" }
+         ]'
+        data-color-white="#"
+        data-color-major-ticks="#000000"
+        data-color-minor-ticks="#000"
+        data-color-title="#000"
+        data-color-units="#000"
+        data-color-numbers="#000"
+        data-color-needle-start="rgba(240, 128, 128, 1)"
+        data-color-needle-end="rgba(255, 160, 122, .9)"
+        data-color-needle-shadow-down="#333"
+        data-value-box="true"
+        data-animation-rule="bounce"
+        data-animation-duration="500"
+        data-font-value="Led"
+        data-animated-value="true"
+        ></canvas>
+        </div>
+
+        </td>
+
+        <td valign="top">
+     <div class="title2">PARTICULAS DE POLVO</div>  
+        <canvas  id="concentra" data-type="radial-gauge"
+        data-width="220"
+        data-height="220"
+        data-units="pcs/L"
+        data-title="CONCENTRACION"
+        data-min-value="0"
+        data-max-value="50000"
+        data-value="0"
+        data-major-ticks="0,10000,20000,30000,40000,50000"
+        data-minor-ticks="2"
+        data-stroke-ticks="false"
+        data-highlights='[
+            { "from": 0, "to": 5000, "color": "rgba(0,242,0,.15)" },
+            { "from": 5000, "to": 10000, "color": "rgba(6,0,100,.15)" },
+            { "from": 10000, "to": 20000, "color": "rgba(5,3,0,.25)" },
+            { "from": 20000, "to": 50000, "color": "rgba(55,0,125,.25)" }           
+                ]'
+        data-color-white="#"
+        data-color-major-ticks="#000000"
+        data-color-minor-ticks="#000"
+        data-color-title="#000"
+        data-color-units="#000"
+        data-color-numbers="#000"
+        data-color-needle-start="rgba(240, 128, 128, 1)"
+        data-color-needle-end="rgba(255, 160, 122, .9)"
+        data-color-needle-shadow-down="#333"
+        data-value-box="true"
+        data-animation-rule="bounce"
+        data-animation-duration="500"
+        data-font-value="Led"
+        data-animated-value="true"
+        ></canvas>  
+
+        <div class="title2">DIOXIDO DE NITROGENO<br>
+        </div> 
+        <div>   
+        <canvas  id="dioxido" data-type="radial-gauge"
+        data-width="220"
+        data-height="220"
+        data-units="ppm"
+        data-title="DIOXIDO DE NITROGENO"
+        data-min-value="00"
+        data-max-value="100"
+        data-value="0"
+        data-major-ticks="0,10,20,30,40,50,60,70,80,90,100"
+        data-minor-ticks="2"
+        data-stroke-ticks="false"
+        data-highlights='[
+        { "from": 0, "to": 10, "color": "rgba(0,242,0,.15)" },
+        { "from": 10, "to": 20, "color": "rgba(0,242,0,.15)" },
+        { "from": 20, "to": 30, "color": "rgba(0,242,0,.15)" },
+        { "from": 30, "to": 40, "color": "rgba(0,242,0,.15)" },
+        { "from": 40, "to": 50, "color": "rgba(0,242,0,.15)" },
+        { "from": 50, "to": 60, "color": "rgba(0,242,0,.15)" },
+        { "from": 60, "to": 70, "color": "rgba(0,242,0,.15)" },
+        { "from": 70, "to": 80, "color": "rgba(200,0,0,.15)" },
+        { "from": 80, "to": 90, "color": "rgba(200,0,0,.40)" },
+        { "from": 90, "to": 100, "color": "rgba(200,0,0,.90)" }
+         ]'
+        data-color-white="#"
+        data-color-major-ticks="#000000"
+        data-color-minor-ticks="#000"
+        data-color-title="#000"
+        data-color-units="#000"
+        data-color-numbers="#000"
+        data-color-needle-start="rgba(240, 128, 128, 1)"
+        data-color-needle-end="rgba(255, 160, 122, .9)"
+        data-color-needle-shadow-down="#333"
+        data-value-box="true"
+        data-animation-rule="bounce"
+        data-animation-duration="500"
+        data-font-value="Led"
+        data-animated-value="true"
+        ></canvas>
+        </div>
+
+        <div class="title2">GAS ISO-BUTANO<br>
+        </div> 
+        <div>   
+        <canvas  id="butano" data-type="radial-gauge"
+        data-width="180"
+        data-height="180"
+        data-units="ppm"
+        data-title="ISO-BUTANO"
+        data-min-value="00"
+        data-max-value="10000"
+        data-value="0"
+        data-major-ticks="0,2000,4000,6000,8000,10000"
+        data-minor-ticks="2"
+        data-stroke-ticks="false"
+        data-highlights='[
+        { "from": 0, "to": 2000, "color": "rgba(0,0,0,.15)" },
+        { "from": 2000, "to": 4000, "color": "rgba(0,0,0,.15)" },
+        { "from": 4000, "to": 6000, "color": "rgba(0,0,0,.20)" },
+        { "from": 6000, "to": 8000, "color": "rgba(0,0,0,.50)" },
+        { "from": 8000, "to": 10000, "color": "rgba(0,0,0,.90)" }
+         ]'
+        data-color-white="#"
+        data-color-major-ticks="#000000"
+        data-color-minor-ticks="#000"
+        data-color-title="#000"
+        data-color-units="#000"
+        data-color-numbers="#000"
+        data-color-needle-start="rgba(240, 128, 128, 1)"
+        data-color-needle-end="rgba(255, 160, 122, .9)"
+        data-color-needle-shadow-down="#333"
+        data-value-box="true"
+        data-animation-rule="bounce"
+        data-animation-duration="500"
+        data-font-value="Led"
+        data-animated-value="true"
+        ></canvas>
+        </div>
+
+    </td>
+
+    <td align="center" valign="top" >
+        <div class="title2">HUMEDAD
+        </div> 
+            
+        <canvas  id="humedad" data-type="radial-gauge"
+        data-width="220"
+        data-height="220"
+        data-units="Hr"
+        data-title="HUMEDAD"
+        data-min-value="0"
+        data-max-value="100"
+        data-value="0"
+        data-major-ticks="0,10,20,30,40,50,60,70,80,90,100"
+        data-minor-ticks="2"
+        data-stroke-ticks="false"
+        data-highlights='[
+            { "from": 0, "to": 5, "color": "rgba(255,242,255,.85)" },
+            { "from": 5, "to": 10, "color": "rgba(255,242,255,.75)" },
+            { "from": 10, "to": 20, "color": "rgba(255,242,255,.45)" },
+            { "from": 20, "to": 50, "color": "rgba(255,242,255,.25)" },
+            { "from": 50, "to": 100, "color": "rgba(0,0,255,.125)" }
+                ]'
+        data-color-white="#000"
+        data-color-major-ticks="#000000"
+        data-color-minor-ticks="#000"
+        data-color-title="#000"
+        data-color-units="#000"
+        data-color-numbers="#000"
+        data-color-needle-start="rgba(240, 128, 128, 1)"
+        data-color-needle-end="rgba(255, 160, 122, .9)"
+        data-color-needle-shadow-down="#333"
+        data-value-box="true"
+        data-animation-rule="bounce"
+        data-animation-duration="500"
+        data-font-value="Led"
+        data-animated-value="true"
+        ></canvas> 
+
+
+        <div class="title2">TEMPERATURA EN ºC 
+        </div> 
+            
+        <canvas  id="tempera" data-type="linear-gauge"
+        data-width="150"
+        data-height="250"
+        data-units="ºC"
+        data-title=TEMPERATURA
+        data-min-value="0"
+        data-max-value="60"
+        data-value="0"
+        data-major-ticks="0,10,20,30,40,50,60"
+        data-minor-ticks="2"
+        data-stroke-ticks="false"
+        data-highlights='[
+            { "from": 0, "to": 5, "color": "rgba(0,242,0,.15)" },
+            { "from": 5, "to": 10, "color": "rgba(6,0,100,.15)" },
+            { "from": 10, "to": 20, "color": "rgba(5,3,0,.25)" },
+            { "from": 20, "to": 50, "color": "rgba(55,0,125,.25)" },
+            { "from": 50, "to": 60, "color": "rgba(255,0,255,.25)" }
+                ]'
+        data-color-white="#000"
+        data-color-major-ticks="#000000"
+        data-color-minor-ticks="#000"
+        data-color-title="#000"
+        data-color-units="#000"
+        data-color-numbers="#000"
+        data-color-needle-start="rgba(240, 128, 128, 1)"
+        data-color-needle-end="rgba(255, 160, 122, .9)"
+        data-color-needle-shadow-down="#333"
+        data-value-box="true"
+        data-animation-rule="bounce"
+        data-animation-duration="500"
+        data-font-value="Led"
+        data-animated-value="true"
+        ></canvas>          
+
+        <div class="title2">GAS PROPANO
+        </div> 
+        <div>   
+        <canvas  id="propano" data-type="radial-gauge"
+        data-width="180"
+        data-height="180"
+        data-units="ppm"
+        data-title="PROPANO"
+        data-min-value="00"
+        data-max-value="100000"
+        data-value="0"
+        data-major-ticks="0,20000,40000,60000,80000,100000"
+        data-minor-ticks="2"
+        data-stroke-ticks="false"
+        data-highlights='[
+        { "from": 0, "to": 20000, "color": "rgba(0,0,0,.15)" },
+        { "from": 20000, "to": 40000, "color": "rgba(0,0,0,.15)" },
+        { "from": 40000, "to": 60000, "color": "rgba(0,0,0,.20)" },
+        { "from": 60000, "to": 80000, "color": "rgba(0,0,0,.50)" },
+        { "from": 80000, "to": 100000, "color": "rgba(0,0,0,.90)" }
+         ]'
+        data-color-white="#"
+        data-color-major-ticks="#000000"
+        data-color-minor-ticks="#000"
+        data-color-title="#000"
+        data-color-units="#000"
+        data-color-numbers="#000"
+        data-color-needle-start="rgba(240, 128, 128, 1)"
+        data-color-needle-end="rgba(255, 160, 122, .9)"
+        data-color-needle-shadow-down="#333"
+        data-value-box="true"
+        data-animation-rule="bounce"
+        data-animation-duration="500"
+        data-font-value="Led"
+        data-animated-value="true"
+        ></canvas>
+        </div>
+
+    </td>
+
+<td hlign="center" valign="top">
+    <div class="title2">PRESION ADMOSFERICA
+    </div> 
+    <div>   
+    <canvas  id="presion" data-type="radial-gauge"
+    data-width="220"
+    data-height="220"
+    data-units="hPa"
+    data-title="PRESION ADMOSFERICA"
+    data-min-value="000"
+    data-max-value="1200"
+    data-value="0"
+    data-major-ticks="0,100,200,300,400,500,600,700,800,900,1000,1100,1200"
+    data-minor-ticks="2"
+    data-stroke-ticks="false"
+    data-highlights='[
+        { "from": 000, "to": 100, "color": "rgba(0,0,0,.0)" },
+        { "from": 100, "to": 200, "color": "rgba(0,0,0,.0)" },
+        { "from": 200, "to": 300, "color": "rgba(0,0,0,.0)" },
+        { "from": 300, "to": 400, "color": "rgba(0,0,0,.0)" },
+        { "from": 400, "to": 500, "color": "rgba(0,0,0,.0)" },
+        { "from": 500, "to": 600, "color": "rgba(0,0,0,.0)" },
+        { "from": 600, "to": 700, "color": "rgba(0,0,0,.0)" },
+        { "from": 700, "to": 800, "color": "rgba(0,0,0,.0)" },
+        { "from": 800, "to": 900, "color": "rgba(0,0,0,.0)" },
+        { "from": 900, "to": 1000, "color": "rgba(0,0,0,.0)" },
+        { "from": 1000,"to": 1100, "color": "rgba(0,0,0,.0)" },
+        { "from": 1100,"to": 1200, "color": "rgba(0,0,0,.0)" }
+    ]'
+    data-color-white="#000"
+    data-color-major-ticks="#000000"
+    data-color-minor-ticks="#000"
+    data-color-title="#000"
+    data-color-units="#000"
+    data-color-numbers="#000"
+    data-color-needle-start="rgba(240, 128, 128, 1)"
+    data-color-needle-end="rgba(255, 160, 122, .9)"
+    data-color-needle-shadow-down="#333"
+    data-value-box="true"
+    data-animation-rule="bounce"
+    data-animation-duration="500"
+    data-font-value="Led"
+    data-animated-value="true"
+    ></canvas>
+    </div>
+
+    <div class="title2">GAS AMONIACO
+    </div> 
+    <div>   
+    <canvas  id="amoniaco" data-type="radial-gauge"
+    data-width="220"
+    data-height="220"
+    data-units="ppm"
+    data-title="GAS AMONIACO"
+    data-min-value="00"
+    data-max-value="50"
+    data-value="0"
+    data-major-ticks="0,10,20,30,40,50"
+    data-minor-ticks="2"
+    data-stroke-ticks="false"
+    data-highlights='[
+    { "from": 0, "to": 10, "color": "rgba(0,242,0,.15)" },
+    { "from": 10, "to": 20, "color": "rgba(0,242,0,.15)" },
+    { "from": 20, "to": 30, "color": "rgba(200,0,0,.20)" },
+    { "from": 30, "to": 40, "color": "rgba(200,0,0,.50)" },
+    { "from": 40, "to": 50, "color": "rgba(200,0,0,.90)" }
+     ]'
+    data-color-white="#"
+    data-color-major-ticks="#000000"
+    data-color-minor-ticks="#000"
+    data-color-title="#000"
+    data-color-units="#000"
+    data-color-numbers="#000"
+    data-color-needle-start="rgba(240, 128, 128, 1)"
+    data-color-needle-end="rgba(255, 160, 122, .9)"
+    data-color-needle-shadow-down="#333"
+    data-value-box="true"
+    data-animation-rule="bounce"
+    data-animation-duration="500"
+    data-font-value="Led"
+    data-animated-value="true"
+    ></canvas>
+    </div>
+
+    <div class="title2">GAS HIDROGENO
+    </div> 
+    <div>   
+    <canvas  id="hidrogeno" data-type="radial-gauge"
+    data-width="180"
+    data-height="180"
+    data-units="ppm"
+    data-title="HIDROGENO"
+    data-min-value="00"
+    data-max-value="100"
+    data-value="0"
+    data-major-ticks="0,20,40,60,80,100"
+    data-minor-ticks="2"
+    data-stroke-ticks="false"
+    data-highlights='[
+    { "from": 0, "to": 20, "color": "rgba(0,0,0,.15)" },
+    { "from": 20, "to": 40, "color": "rgba(0,0,0,.15)" },
+    { "from": 40, "to": 60, "color": "rgba(0,0,0,.20)" },
+    { "from": 60, "to": 80, "color": "rgba(0,0,0,.50)" },
+    { "from": 80, "to": 100, "color": "rgba(0,0,0,.90)" }
+     ]'
+    data-color-white="#"
+    data-color-major-ticks="#000000"
+    data-color-minor-ticks="#000"
+    data-color-title="#000"
+    data-color-units="#000"
+    data-color-numbers="#000"
+    data-color-needle-start="rgba(240, 128, 128, 1)"
+    data-color-needle-end="rgba(255, 160, 122, .9)"
+    data-color-needle-shadow-down="#333"
+    data-value-box="true"
+    data-animation-rule="bounce"
+    data-animation-duration="500"
+    data-font-value="Led"
+    data-animated-value="true"
+    ></canvas>
+    </div>
+
+</td>
+
+    <td>
+        <div class ="title3"><h1>CONTROLES</h1>
+<!--Inicio formulario de entrada de la Ratio disparo con socket-->
+        <div class ="title"><h2></h2>
+        <h4>Ratio apartir de la cual se activa <br> la extracción de partículas</h4>
+        <p>Entrar valores numericos del 0 al 100</p>
+
+        <input class="user-circle" id="Message" type="number" name="name" value=""/>
+        <button class="button1" id="Send"><h3>ENVIAR</h3></button><br/>
+        <div id="Messages">La Ratio inicial es: 20</div>
+        </div>
+        <script>
+        socket = io.connect();
+        socket.on("connect", function () {
+        //console.log("Conectado");
+        });
+        socket.on("mensaje_servidor", function (message) {
+        document.getElementById("Messages").innerHTML = "Valor actual de la Ratio de disparo =" + message ;
+        });
+        document.getElementById("Send").addEventListener("click", function () {
+        socket.emit("mensaje_cliente", document.getElementById("Message").value);
+        });
+        </script> 
+<!--Final formulario de entrada Ratio disparo-->
+
+<!--indicacion extraccion activada-->
+<div class ="title" height="65" width="50" style="border-width: 1px;border: solid; border-color: rgb(255, 255, 255);"><h2 id="estractor"></h2></div>
+
+<!--Inicio boton activar/desactivar-->
+        <div class ="title1">
+        <h3>PULSADOR (activar/desactivar LED)</h3>	 
+        <div  class="button" onclick="buttonClicked()"><h3>ON/OFF</h3> </div>
+        <h2><p id="buttonCount"></p></h2>
+        </div>
+        <script>
+        var socket = io.connect(); 
+        function buttonClicked(){
+        socket.emit('clicked');
+        }
+        //cuando se recibe buttonUpdate, haz esto
+        socket.on('buttonUpdate', function(data){
+        document.getElementById("buttonCount").innerHTML =  data  ;
+        });
+        </script>
+<!--Final boton activar/desactivar-->
+  
+<!--prueba audio-->
+<audio id="myAudio">
+    <source src="alarma.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<!--Inicio recepcion datos JSON de pulsador alarma y sacar mensaje por Html-->
+<script>
+socket.on('pulso', function (data) {   
+    var status = JSON.parse(data); //extraer dato digital I/O para representar alarma con texto    
+    if (status.pulso == "1") {                
+        document.getElementById("pulsador").style.color = "red";
+        document.getElementById("pulsador").style.backgroundColor = "white"; 
+        document.getElementById("pulsador").innerHTML="ALARMA ACTIVADA";
+        var x = document.getElementById("myAudio"); //para generar sonido alarma
+        function playAudio() { x.play(); }
+        playAudio();     
+        }      
+        });
+
+    function desactivAlarm() {
+        document.getElementById("pulsador").style.textAlign = "center";
+        document.getElementById("pulsador").style.color = "green";
+        document.getElementById("pulsador").style.backgroundColor = "white"; 
+        document.getElementById("pulsador").innerHTML="ALARMA DESACTIVADA"; 
+        var socket = io.connect(); 
+        socket.emit('clickedAlarm');
+    }
+</script>
+
+<!--indicacion de alarma,pulsador activado-->
+<div class ="title" height="65" width="50" style="border-width: 1px;border: solid; border-color: rgb(255, 255, 255);"><h2 id="pulsador"></h2>
+    <div><p>En caso de alarma activada</p></div>
+    <div class="button3" onclick="desactivAlarm()">desactivar</div></div>
+<!--Final recepcion datos JSON de pulsador alarma y sacar mensaje por Html--> 
+
+<!--inicio mensaje estractor-->
+<script>
+    socket.on('stract', function (data) {   
+        var status = JSON.parse(data); //extraer dato digital I/O para representar alarma con texto
+        if (status.stract == "0") {        
+            document.getElementById("estractor").style.textAlign = "center";
+            document.getElementById("estractor").style.color = "green";
+            document.getElementById("estractor").style.backgroundColor = "white"; 
+            document.getElementById("estractor").innerHTML="EXTRACCION DESACTIVADA";
+             } 
+        else {             
+            document.getElementById("estractor").style.color = "red";
+            document.getElementById("estractor").style.backgroundColor = "white"; 
+            document.getElementById("estractor").innerHTML="EXTRACCION ACTIVADA";
+            }       
+            });  
+    </script> 
+<!--final mensaje estractor-->
+
+<!--Inicio mando deslizante-->
+<script>
+    function lecturaSlider(){
+    var socket = io.connect();
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value
+    slider.oninput = function() {
+      output.innerHTML = this.value;
+      }
+      socket.emit('blinkInterval',output.innerHTML );
+    }
+</script>
+
+<div class ="title1">
+<h3>CONTROL POR MANDO DESLIZANTE</h3>
+        <div class="slidecontainer">
+        <input type="range" min="0" max="100" value="0" class="slider" id="myRange">
+        <p><h3>Ciclo de trabajo:<span id="demo"></span></h3></p>
+        </div>
+
+            <h3>Enviar valor seleccionado</h3>	 
+            <div  class="button" onclick="lecturaSlider()"><h4>enviar</h4> </div>
+            </div>
+<!--Final mando deslizante-->
+    
+    </td>
+</tr>  <!--Finaliza la primera fila de la tabla--> 
+
+<tr>    <!--Comienza la segunda fila de la tabla-->
+    <td valign="top" colspan="2">
+
+<!--Definimos contenedor y lectura de datos para las Gráficas-->
+        <div id="Ratio" style="height: 550px; min-width: 210px"></div>
+        <div id="Concentracion" style="height: 550px; min-width: 210px"></div>
+        <div id="Monoxido_de_carbono" style="height: 550px; min-width: 210px"></div>
+        <div id="Dioxido_de_nitrogeno" style="height: 550px; min-width: 210px"></div>
+    </td>
+    <td valign="top" colspan="2">
+        <div id="Temperatura" style="height: 550px; min-width: 210px"></div>
+        <div id="Humedad" style="height: 550px; min-width: 210px"></div>
+        <div id="Presion_admosferica" style="height: 550px; min-width: 210px"></div>
+        <div id="Gas_amoniaco" style="height: 550px; min-width: 210px"></div>
+    </td>
+
+
+    <td valign="top">   
+            <div class ="title2">   
+        <div class="container" >
+        <P><h3>Terminología de la medición de partículas:</h3></P>                       
+        <p><h4> Tiempo de ocupación de los pulsos</h4> <h5>Representa la suma de los tiempos de ocupación<br> de los pulsos nivel bajo (LPO Time)provocados <br>por las partículas  detectadas en 30 segundos.<br> 
+        Su unidad es microsegundos.</h5> </P> 
+        <p><h4> La Ratio</h4><h5>Refleja el porcentage de tiempo de los (LPO)<br>en referencia al tiempo total de la muestra.<br> Ratio=(LPO/30000000)x100.
+        </h5></P> 
+        <p><h4>La Concentración</h4> <h5>Es un Dato que tiene un significado físico.<br>
+        Se calcula a partir del tiempo de ocupacion de los (LPO) <br>
+        Se mide en particula por litro de aire (pcs/l) para un <br>tamaño de partículas por encima de 1um.<br></h5>
+           
+        </div></div>
+
+        <h2>Curvas caracteristicas (ejemplo: humo tabaco)  </h2>
+        <img src="caracteristica.jpg" alt="Sensor partículas" width="450" height="350">
+        <h2>PROGRAMA ARDUINO</h2>
+        <object width="450" height="700" background="white" data="arduino.pdf"></object>      
+    </td>
+</tr>
+
+<!--comienza la tercera fila-->
+<tr>
+</tr>
+<!--finaliza la tercera fila-->
+
+<!--comienza la cuarta fila-->
+<tr><td valign="top" colspan="5">
+      <!--<img src="esquema.jpg" alt="Sensor partículas" width="800" height="650">-->
+        <h2>ESQUEMA CIRCUITO</h2>
+    <object width="1500" height="700" background="white" data="esquema.pdf"></object>
+</td>
+</tr>
+</table>
+<script>
+    //Generación de las graficas
+        function lectura() {
+		$.getJSON('http://192.168.1.111:9090/datos', function (data) {
+        var datos = [];
+        datos = data;
+        var ratio = [];
+        var concentracion = [];
+        var tem =[];
+        var hum =[];
+        var pre =[];
+        var gnh3 =[];
+        var gco =[];
+        var gno2 =[];
+        var gch4 =[];
+        var gc4h10 =[];
+        var gc3h8 =[];
+        var gh2 =[];
+        var x = [];
+        
+        datos.forEach(function (item, index) { //substituye a: for (i = 0; i < items.length; i++) {
+            x = [];
+            x.push(item[0]);//datos columna tiempos
+            x.push(item[1]);//datos columna ratio, teniendo en cuenta que la gráfica solo lee las 2 primeras columnas
+            ratio.push(x);
+            x = [];
+            x.push(item[0]);//datos columna tiempos
+            x.push(item[2]);//datos columna concentracion, teniendo en cuenta que la gráfica solo lee las 2 primeras columnas
+            concentracion.push(x);
+            x = [];
+            x.push(item[0]);//datos columna tiempos
+            x.push(item[3]);//datos columna temperatura, teniendo en cuenta que la gráfica solo lee las 2 primeras columnas
+            tem.push(x);
+            x = [];
+            x.push(item[0]);//datos columna tiempos
+            x.push(item[4]);//datos columna humedad, teniendo en cuenta que la gráfica solo lee las 2 primeras columnas
+            hum.push(x);
+            x = [];
+            x.push(item[0]);//datos columna tiempos
+            x.push(item[5]);//datos columna presion, teniendo en cuenta que la gráfica solo lee las 2 primeras columnas
+            pre.push(x);
+            x = [];
+            x.push(item[0]);//datos columna tiempos
+            x.push(item[6]);//datos columna amoniaco, teniendo en cuenta que la gráfica solo lee las 2 primeras columnas
+            gnh3.push(x);
+            x = [];
+            x.push(item[0]);//datos columna tiempos
+            x.push(item[7]);//datos columna monoxido, teniendo en cuenta que la gráfica solo lee las 2 primeras columnas
+            gco.push(x);
+            x = [];
+            x.push(item[0]);//datos columna tiempos
+            x.push(item[8]);//datos columna dioxido de nitrogeno, teniendo en cuenta que la gráfica solo lee las 2 primeras columnas
+            gno2.push(x);
+            x = [];
+            x.push(item[0]);//datos columna tiempos
+            x.push(item[9]);//datos columna metano, teniendo en cuenta que la gráfica solo lee las 2 primeras columnas
+            gch4.push(x);
+            x = [];
+            x.push(item[0]);//datos columna tiempos
+            x.push(item[10]);//datos columna iso-butano, teniendo en cuenta que la gráfica solo lee las 2 primeras columnas
+            gc4h10.push(x);
+            x = [];
+            x.push(item[0]);//datos columna tiempos
+            x.push(item[11]);//datos columna propano, teniendo en cuenta que la gráfica solo lee las 2 primeras columnas
+            gc3h8.push(x);
+            x = [];
+            x.push(item[0]);//datos columna tiempos
+            x.push(item[12]);//datos columna dioxido de hirogeno, teniendo en cuenta que la gráfica solo lee las 2 primeras columnas
+            gh2.push(x);
+
+        });
+        //enviar datos a Gauge y otros Id
+        var rati = ratio[ratio.length - 1][1];//para leer el último valor actualizado de la ratio
+        document.getElementById("ratios").setAttribute("data-value", rati);//enviar a gauge con id="ratios"
+        
+        var concen = concentracion[concentracion.length - 1][1];//para leer el último valor actualizado de la concentración
+        document.getElementById("concentra").setAttribute("data-value", concen);//enviar a gauge con id="concentra"
+        
+        var tempe = tem[tem.length - 1][1];//para leer el último valor actualizado de la temperarura
+        document.getElementById("tempera").setAttribute("data-value", tempe);//enviar a gauge con id="tempera"
+        //document.getElementById("puls").innerHTML = tempe ; //enviar dato de temperatura a la id="puls"
+
+        var hume = hum[hum.length - 1][1];//para leer el último valor actualizado de la humedad
+        document.getElementById("humedad").setAttribute("data-value", hume);//enviar a gauge con id="humedad"        
+        //fin enviar datos a Gauge y otros Id
+
+        var pres = pre[pre.length - 1][1];//para leer el último valor actualizado de la presion
+        document.getElementById("presion").setAttribute("data-value", pres);//enviar a gauge con id="presion"  
+         
+        var amoni = gnh3[gnh3.length - 1][1];//para leer el último valor actualizado del amoniaco
+        document.getElementById("amoniaco").setAttribute("data-value", amoni);//enviar a gauge con id="amoniaco"  
+
+        var monoxi = gco[gco.length - 1][1];//para leer el último valor actualizado del monoxido de carbono
+        document.getElementById("monoxido").setAttribute("data-value", monoxi);//enviar a gauge con id="monoxido" 
+
+        var dioxi = gno2[gno2.length - 1][1];//para leer el último valor actualizado del dioxido de nitrogeno
+        document.getElementById("dioxido").setAttribute("data-value", dioxi);//enviar a gauge con id="dioxido" 
+
+        var meta = gch4[gch4.length - 1][1];//para leer el último valor actualizado del metano
+        document.getElementById("metano").setAttribute("data-value", meta);//enviar a gauge con id="metano" 
+
+        var buta = gc4h10[gc4h10.length - 1][1];//para leer el último valor actualizado del butano
+        document.getElementById("butano").setAttribute("data-value", buta);//enviar a gauge con id="butano" 
+
+        var propa = gc3h8[gc3h8.length - 1][1];//para leer el último valor actualizado del propano
+        document.getElementById("propano").setAttribute("data-value", propa);//enviar a gauge con id="propano" 
+
+        var hidro = gh2[gh2.length - 1][1];//para leer el último valor actualizado del hidrogeno
+        document.getElementById("hidrogeno").setAttribute("data-value", hidro);//enviar a gauge con id="hidrogeno"     
+              
+        //fin enviar datos a Gauge y otros Id
+
+        
+    // Creacion de la grafica Ratio
+    Highcharts.stockChart('Ratio', {
+        rangeSelector: { 
+            selected: 1
+        },
+        title: {
+            text: 'GRAFICA EN TIEMPO REAL DE LA RATIO'
+        },
+        series: [{
+            name: 'Ratio',
+            data: ratio,
+            type: 'areaspline',
+            threshold: null,
+            tooltip: {
+                valueDecimals: 2
+            },
+            fillColor: {
+                linearGradient: {
+                    x1: 0,
+                    y1: 0,
+                    x2: 0,
+                    y2: 1
+                },
+                stops: [
+                    [0, Highcharts.getOptions().colors[6]],
+                    [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                ]
+            }
+        }]
+    });
+    //creacion de la grafica concentracion
+    Highcharts.stockChart('Concentracion', {
+        rangeSelector: {
+            selected: 1
+        },
+        title: {
+            text: 'GRAFICA EN TIEMPO REAL DE LA CONCENTRACION'
+        },
+        series: [{
+            name: 'Concentracion',
+            data: concentracion,
+            type: 'areaspline',
+            threshold: null,
+            tooltip: {
+                valueDecimals: 2
+            },
+            fillColor: {
+                linearGradient: {
+                    x1: 0,
+                    y1: 0,
+                    x2: 0,
+                    y2: 1
+                },
+                stops: [
+                    [0, Highcharts.getOptions().colors[6]],
+                    [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                ]
+            }
+        }]
+    });
+
+ //creacion de la grafica temperatura
+ Highcharts.stockChart('Temperatura', {
+        rangeSelector: {
+            selected: 1
+        },
+        title: {
+            text: 'GRAFICA EN TIEMPO REAL DE LA TEMPERATURA'
+        },
+        series: [{
+            name: 'Temperatura',
+            data: tem,
+            type: 'areaspline',
+            threshold: null,
+            tooltip: {
+                valueDecimals: 2
+            },
+            fillColor: {
+                linearGradient: {
+                    x1: 0,
+                    y1: 0,
+                    x2: 0,
+                    y2: 1
+                },
+                stops: [
+                    [0, Highcharts.getOptions().colors[6]],
+                    [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                ]
+            }
+        }]
+    });
+
+ //creacion de la grafica humedad
+ Highcharts.stockChart('Humedad', {
+        rangeSelector: {
+            selected: 1
+        },
+        title: {
+            text: 'GRAFICA EN TIEMPO REAL DE LA HUMEDAD'
+        },
+        series: [{
+            name: 'Humedad',
+            data: hum,
+            type: 'areaspline',
+            threshold: null,
+            tooltip: {
+                valueDecimals: 2
+            },
+            fillColor: {
+                linearGradient: {
+                    x1: 0,
+                    y1: 0,
+                    x2: 0,
+                    y2: 1
+                },
+                stops: [
+                    [0, Highcharts.getOptions().colors[6]],
+                    [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                ]
+            }
+        }]
+    });
+
+ //creacion de la grafica Presión admosférica
+ Highcharts.stockChart('Presion_admosferica', {
+        rangeSelector: {
+            selected: 1
+        },
+        title: {
+            text: 'GRAFICA EN TIEMPO REAL DE LA PRESION ADMOSFERICA EN hPa'
+        },
+        series: [{
+            name: 'Presion_admosferica',
+            data: pre,
+            type: 'areaspline',
+            threshold: null,
+            tooltip: {
+                valueDecimals: 2
+            },
+            fillColor: {
+                linearGradient: {
+                    x1: 0,
+                    y1: 0,
+                    x2: 0,
+                    y2: 1
+                },
+                stops: [
+                    [0, Highcharts.getOptions().colors[6]],
+                    [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                ]
+            }
+        }]
+    });
+
+    //creacion de la grafica Monoxido de carbono
+ Highcharts.stockChart('Monoxido_de_carbono', {
+        rangeSelector: {
+            selected: 1
+        },
+        title: {
+            text: 'GRAFICA EN TIEMPO REAL DEL MONOXIDO DE CARBONO EN ppm'
+        },
+        series: [{
+            name: 'Monoxido_de_carbono',
+            data: gco,
+            type: 'areaspline',
+            threshold: null,
+            tooltip: {
+                valueDecimals: 2
+            },
+            fillColor: {
+                linearGradient: {
+                    x1: 0,
+                    y1: 0,
+                    x2: 0,
+                    y2: 1
+                },
+                stops: [
+                    [0, Highcharts.getOptions().colors[6]],
+                    [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                ]
+            }
+        }]
+    });
+
+       //creacion de la grafica Dioxido de nitrogeno
+ Highcharts.stockChart('Dioxido_de_nitrogeno', {
+        rangeSelector: {
+            selected: 1
+        },
+        title: {
+            text: 'GRAFICA EN TIEMPO REAL DEL DIOXIDO DE NITROGENO EN ppm'
+        },
+        series: [{
+            name: 'Dioxido_de_nitrogeno',
+            data: gno2,
+            type: 'areaspline',
+            threshold: null,
+            tooltip: {
+                valueDecimals: 2
+            },
+            fillColor: {
+                linearGradient: {
+                    x1: 0,
+                    y1: 0,
+                    x2: 0,
+                    y2: 1
+                },
+                stops: [
+                    [0, Highcharts.getOptions().colors[6]],
+                    [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                ]
+            }
+        }]
+    });
+
+    //creacion de la grafica del Gas amoniaco
+ Highcharts.stockChart('Gas_amoniaco', {
+        rangeSelector: {
+            selected: 1
+        },
+        title: {
+            text: 'GRAFICA EN TIEMPO REAL DEL GAS AMONIACO EN ppm'
+        },
+        series: [{
+            name: 'Gas_amoniaco',
+            data: gnh3,
+            type: 'areaspline',
+            threshold: null,
+            tooltip: {
+                valueDecimals: 2
+            },
+            fillColor: {
+                linearGradient: {
+                    x1: 0,
+                    y1: 0,
+                    x2: 0,
+                    y2: 1
+                },
+                stops: [
+                    [0, Highcharts.getOptions().colors[6]],
+                    [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                ]
+            }
+        }]
+    });
+
+
+
+});
+}
+    setInterval(lectura, 40000);   
+
+</script> 
+
+</body>
+</html> 

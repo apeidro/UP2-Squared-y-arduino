@@ -1,0 +1,366 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+body {
+    font:13px Helvetica, Arial;
+}
+
+.title {
+    font-size: 1.3em;
+    padding: 0.5em 0em 0.5em 0em;
+    text-align: center;
+    background-color: rgb(122, 161, 154);
+    color: rgb(42, 73, 42);
+    border-radius: 15px;
+}
+
+.log-title {
+    color: red;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.title1 {
+    font-size: 1.3em;
+    padding: 0.5em 0em 0.5em 0em;
+    text-align: center;
+    background-color: rgb(130, 151, 147);
+    color: rgb(53, 80, 53);
+    border-radius: 15px;
+}
+
+.log-title1 {
+    color: red;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.title2 {
+    font-size: 1.1em;
+    padding: 0.5em 0em 0.5em 0em;
+    text-align: center;
+    background-color: rgb(223, 231, 223);
+    color: rgb(1, 19, 1);
+    border-radius: 10px;
+}
+
+.log-title2 {
+    color: red;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.title3 {
+    font-size: 1.3em;
+    padding: 0.5em 0em 0.5em 0em;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    color: rgb(16, 4, 180);
+    border-radius: 10px;
+}
+
+.log-title3 {
+    color: red;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.container {
+    padding: 1em 0em;
+}
+.container1 {
+    padding: 1em 0em;
+}
+.sub-title {
+    font-size: 1.5em;
+}
+
+.user-circle, .my-circle {
+    width: 5em;
+    height: 1.5em;
+    border-radius: 1px;
+    font-size: 1em;
+    padding: 1px 1px;
+    text-align: center;
+    margin-left: 1em;
+    color: rgb(12, 12, 12);
+}
+
+.user-circle {
+    background-color: #edf5f0;
+}
+
+.my-circle {
+    background-color: rgb(17,94,162);
+}
+
+.user-circle span, .my-circle span, #led-container span, #led-container1 span {
+    vertical-align: middle;
+    vertical-align: -webkit-baseline-middle;
+}
+
+#led-container {
+    width: 4em;
+    height: 2.5em;
+    margin-left: 1em;
+    text-align: center;
+}
+
+.off {
+    background-color: #f7f7f0;
+    border: 1px solid #f8f5f5;
+}
+
+.on {
+    background-color: limegreen;
+    border: 1px solid #7f8c8d;
+}
+#led-container1 {
+    width: 4em;
+    height: 2.5em;
+    margin-left: 1em;
+    text-align: center;
+}
+
+.off {
+    background-color: #e4eaee;
+    border: 1px solid #f6fafa;
+}
+
+.on {
+    background-color: limegreen;
+    border: 1px solid #7f8c8d;
+}
+
+
+#led-container > span {
+    padding: 3em 0em;
+    color: white;
+    font-weight: bold;
+}
+#led-container1 > span {
+    padding: 3em 0em;
+    color: white;
+    font-weight: bold;
+}
+#led-link {
+    margin: 1em 1em;
+    color: #3498db;
+    font-weight: bold;
+    font-size: 1.8em;
+    border: 2px solid currentColor;
+    border-radius: 5px;
+}
+#led-link1 {
+    margin: 1em 1em;
+    color: #3498db;
+    font-weight: bold;
+    font-size: 1.8em;
+    border: 2px solid currentColor;
+    border-radius: 5px;
+}
+
+
+#led-link-container {
+    margin-top: 1em;
+}
+
+
+.log-container {
+    height: 10em;
+    overflow-y: scroll;
+}
+
+form {
+    background: rgb(17,94,162);
+    padding: 3px;
+    position: fixed;
+    bottom: 0;
+    width: 100%
+}
+
+form input {
+    border: 0;
+    padding: 10px;
+    width: 85%;
+    margin-right: .5%
+}
+
+form button {
+    width: 13%;
+    background: #FFD630;
+    font-weight: bold;
+    border: none;
+    padding: 10px 3px;
+}
+
+#led-link-container1 {
+    margin-top: 1em;
+}
+
+
+.log-container {
+    height: 10em;
+    overflow-y: scroll;
+}
+
+form {
+    background: rgb(17,94,162);
+    padding: 3px;
+    position: fixed;
+    bottom: 0;
+    width: 100%
+}
+
+form input {
+    border: 0;
+    padding: 10px;
+    width: 85%;
+    margin-right: .5%
+}
+
+form button {
+    width: 13%;
+    background: #FFD630;
+    font-weight: bold;
+    border: none;
+    padding: 10px 3px;
+}
+
+#messages {
+    list-style-type: none;
+    margin: 0;
+    padding: 0
+}
+
+#messages li {
+    padding: 5px 10px
+}
+
+#messages li:nth-child(odd) {
+    background: rgba(17,94,162, 0.1);
+}
+
+#messages li span {
+    color: gray;
+    font-style: italic;
+}
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 1px 1px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    
+    cursor: pointer;
+    border-radius: 50px;
+    width: 26%;
+    height: 29px;
+}
+.button1 {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 3px 3px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    height: 29px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.button2 {
+    background-color: rgb(208, 214, 209);
+    border: none;
+    color: rgb(100, 97, 97);
+    padding: 3px 3px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    height: 27px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.button3 {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 1px 1px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    
+    cursor: pointer;
+    border-radius: 50px;
+    width: 40%;
+    height: 29px;
+}
+a:link {
+    color: rgb(8, 88, 15);
+    background-color: rgb(248, 250, 248);
+    border: 2px solid currentColor;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 21px;
+    margin: 4px 2px;
+}
+a:visited {
+    color: rgb(32, 99, 161);
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(255, 255, 255);
+    background-color: rgb(32, 99, 161);
+    text-decoration: none;
+}
+
+a:active {
+    color: yellow;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+.slidecontainer {width: 100%; }
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 15px;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+        
+        .slider:hover {
+            opacity: 1;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: rgb(150, 16, 28);
+            cursor: pointer;
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }

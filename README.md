@@ -5,7 +5,7 @@ Use UP2 squared together with arduino to control and visualize sensor data: gas 
 The project is designed to work with nodejs on the side of the UP2 squared with ubuntu 16.04 LTS. There are some limitations regarding the version of nodejs to optimize the operation of the libraries used, specifically the version v6.16.0 is used. This version allows the implementation of the mraa library.
 The data is obtained by the sensors installed in arduino and sent in JSON format by serialport to the UP2 squared to visualize them and perform controls and saved for its representation in graphics.
 
-Characteristics of the program files.
+DESCRIPTION OF THE PROGRAM FILES.
 
 -server.js  It is the main program. Make the connection with arduino through the serialport, save the data and manage the controls with Node Sockets.
 
@@ -14,5 +14,7 @@ Characteristics of the program files.
 -screen_web.pdf  It is a graphic sample of what is seen when executing the index.html file.
 
 -esquema.pdf  it is the scheme of the circuit.
+
+-arduino.pdf  is the file that contains the program that controls the arduino board UNO
 
 

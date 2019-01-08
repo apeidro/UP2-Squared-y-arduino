@@ -11,4 +11,8 @@ Characteristics of the program files.
 
 -index.html  It is the web page that contains the elements of control and visualization of sensors along with the graphs.
 
+-screen_web.pdf  It is a graphic sample of what is seen when executing the index.html file.
+
+-esquema.pdf  it is the scheme of the circuit.
+
 

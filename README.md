@@ -9,4 +9,6 @@ Characteristics of the program files.
 
 -server.js  It is the main program. Make the connection with arduino through the serialport, save the data and manage the controls with Node Sockets.
 
--index.html 
+-index.html  It is the web page that contains the elements of control and visualization of sensors along with the graphs.
+
+

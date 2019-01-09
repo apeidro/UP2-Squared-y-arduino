@@ -17,7 +17,7 @@ app.get('/', function(req, res, next) {
     res.sendFile(__dirname + '/index.html');
 });
 
-//Conexión con el port serie del STM32 para enviar y recibir datos de sensores y pines
+//Conexión con el port serie del arduino para enviar y recibir datos de sensores y pines
 var SerialPort = require('serialport');
 var serialPort = new SerialPort('/dev/ttyS5', {baudRate: 115200});//S5 = UART1 del UP2squared
 var Readline = SerialPort.parsers.Readline;
@@ -28,7 +28,7 @@ console.log('Communication is on!');
 });
 
 
-//Socket para conmutar el led del stm32 por petició cliente web
+//Socket para conmutar el led del arduino por petició cliente web
 io.on('connection', function(client) { 
 client.on('clicked', function() {
 myled1 = ! myled1 ;
@@ -86,10 +86,10 @@ io.on('connection', function (socket) {
   });
 //fin conexion mando deslizante
 
-//comienzo extraccion datos port serie
+//comienzo lectura datos port serie
 parser.on('data', function (data) {	
     str = JSON.parse(data); // parse datos del port serie
- alarm = str.alar; // extraer alarma enviada por el stm32
+ alarm = str.alar; // extraer alarma enviada por el arduino
  if (alarm == 1){
      io.emit('pulso' , JSON.stringify({'pulso': 1}));//activar alarma
      console.log("alarma activada:", alarm);
@@ -116,11 +116,11 @@ if (ratioDisparo == 0 ) {
     }
 if (ratio > ratioDisparo){
     estractor = 1; //variable utilizada para enviar mensaje estraccion al cliente web
-    serialPort.write('a');//para identificar activación estractor en el stm32 
+    serialPort.write('a');//para identificar activación estractor en el arduino
     }
 else {
     estractor = 0; //variable utilizada para enviar mensaje estraccion al cliente web
-    serialPort.write('b'); //para identificar desactivación estractor en el stm32 
+    serialPort.write('b'); //para identificar desactivación estractor en el arduino
     }
 
 //enviamos los datos al archivo datos.csv

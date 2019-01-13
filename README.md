@@ -7,14 +7,18 @@ Los datos son obtenidos por los sensores instalados en arduino y enviados en for
 DESCRIPCIÓN DE LOS ARCHIVOS PRINCIPALES DEL PROGRAMA.
 
 -server.js 
-Es el programa principal. RealiZA la conexión con arduino a través deL serialport, almacena los datos y administra los controles con Node sockets.
+Es el programa principal. Realiza la conexión con arduino a través deL serialport, almacena los datos y administra los controles con Node sockets.
 
--index.html Es la página web que contiene los elementos de control y visualización de sensores junto con los gráficos.
+-index.html 
+Es la página web que contiene los elementos de control y visualización de sensores junto con los gráficos.
 
--screen_web.pdf Es una muestra gráfica de lo que se ve cuando se ejecuta el archivo index.html.
+-screen_web.pdf 
+Es una muestra gráfica de lo que se ve cuando se ejecuta el archivo index.html.
 
--esquema.pdf es el esquema del circuito.
+-esquema.pdf 
+es el esquema del circuito.
 
--arduino.pdf es el archivo que contiene el programa que controla el tablero de arduino UNO
+-arduino.pdf 
+es el archivo que contiene el programa del arduino.
 
 

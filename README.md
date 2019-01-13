@@ -1,20 +1,20 @@
-# UP2-Squared-and-arduino
-Use UP2 squared together with arduino to control and visualize sensor data: gas particles, dust particles, atmospheric pressure, etc.
+Utilización del UP2squared junto con arduino para controlar y visualizar los datos de sensores: partículas de gas, partículas de polvo, presión atmosférica, etc.
 
 
-The project is designed to work with nodejs on the side of the UP2 squared with ubuntu 16.04 LTS. There are some limitations regarding the version of nodejs to optimize the operation of the libraries used, specifically the version v6.16.0 is used. This version allows the implementation of the mraa library.
-The data is obtained by the sensors installed in arduino and sent in JSON format by serialport to the UP2 squared to visualize them and perform controls and saved for its representation in graphics.
+El proyecto está diseñado para trabajar con nodejs en el lado de UP2squared con ubuntu 16.04 LTS. Se utiliza la versión v6.16.0.del nodejs. Esta versión permite la implementación de la librería mraa sin problemas.
+Los datos son obtenidos por los sensores instalados en arduino y enviados en formato JSON por el serialport al Up2squared, des de el que por medio de página web, visualizamos los datos, realizamos controles, almacenamos los datos y los representamos en tiempo real con gráficas.
 
-DESCRIPTION OF THE PROGRAM FILES.
+DESCRIPCIÓN DE LOS ARCHIVOS PRINCIPALES DEL PROGRAMA.
 
--server.js  It is the main program. Make the connection with arduino through the serialport, save the data and manage the controls with Node Sockets.
+-server.js 
+Es el programa principal. RealiZA la conexión con arduino a través deL serialport, almacena los datos y administra los controles con Node sockets.
 
--index.html  It is the web page that contains the elements of control and visualization of sensors along with the graphs.
+-index.html Es la página web que contiene los elementos de control y visualización de sensores junto con los gráficos.
 
--screen_web.pdf  It is a graphic sample of what is seen when executing the index.html file.
+-screen_web.pdf Es una muestra gráfica de lo que se ve cuando se ejecuta el archivo index.html.
 
--esquema.pdf  it is the scheme of the circuit.
+-esquema.pdf es el esquema del circuito.
 
--arduino.pdf  is the file that contains the program that controls the arduino board UNO
+-arduino.pdf es el archivo que contiene el programa que controla el tablero de arduino UNO
 
 

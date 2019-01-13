@@ -30,6 +30,6 @@ Contiene el programa del arduino.
 
 Contiene los estilos para la web.
 
-Los otros archivos son librerias para generar las gráficas de representación de datos y representar los controles y datos obtenidos.
+Los otros archivos son librerias para generar las gráficas de representación de datos, los controles y visualización.
 
 

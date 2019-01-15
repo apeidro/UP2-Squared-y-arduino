@@ -2,7 +2,7 @@ Utilización de la "UP2squared" junto con "arduino" para controlar y visualizar 
 
 
 El proyecto está diseñado para trabajar con nodejs en la UP2squared con ubuntu 16.04 LTS. Se utiliza la versión v6.16.0.del nodejs, esta versión permite la implementación de la librería mraa sin problemas.
-Los datos son obtenidos por los sensores instalados en arduino y enviados en formato JSON por el serialport a la Up2squared y por medio de página web, visualizamos los datos, realizamos controles, almacenamos los datos y los representamos en tiempo real con gráficas. Los datos se almacenan en el archivo "datos.csv", en formato "csv" son facilmente exportables a windows Excel o a cualquier base de datos.
+Los datos son obtenidos por los sensores instalados en arduino y enviados en formato JSON por el serialport a la Up2squared y visualizados en página web. Realizamos controles, almacenamos los datos y los representamos en tiempo real con gráficas. Los datos se almacenan en el archivo "datos.csv", en formato "csv" son facilmente exportables a windows Excel o a cualquier base de datos.
 Es necesario visualizar el "esquema.pdf" para poder hacer un correcto seguimiento de la programación.
 
 DESCRIPCIÓN DE LOS ARCHIVOS PRINCIPALES DEL PROGRAMA.
@@ -31,6 +31,6 @@ Contiene el programa del arduino.
 
 Contiene los estilos para la web.
 
-Los otros archivos son librerias para generar las gráficas de representación de datos, los controles y visualización.
+Los otros archivos son librerias para generar las gráficas de representación de datos, controles y visualización.
 
 
